@@ -1,8 +1,8 @@
 import colorConverter from 'color-convert'
 
 
-export const CmykToHsl = (color: any) => {
+export const HextoRgb = (color: any) => {
 
-    return colorConverter.cmyk.hsl(color)
+    return colorConverter.hex.rgb(color)
 
 }
