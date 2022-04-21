@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  reverse-proxy:
+    image: traefik
+    command: --api.insecure=true --providers.docker --providers.docker.exposedByDefault=false
+    restart: on-failure
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+
+  cmyktohsl:
+    build: cmyktohsl
+    restart: on-failure
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.quote-service.rule=Host(`vagrantbox.local`) && PathPrefix(`/quotes/`)"
+      - "traefik.http.middlewares.quote-service-strip.stripprefix.prefixes=/quotes"
+      - "traefik.http.services.quote-service.loadbalancer.server.port=3000"
+      - "traefik.http.routers.quote-service.middlewares=quote-service-strip"
+    ports:
+      - "3000:3000"
+
+    
