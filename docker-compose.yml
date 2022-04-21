@@ -1,27 +1,34 @@
-version: "3.8"
+version: "1"
 
 services:
   reverse-proxy:
     image: traefik
     command: --api.insecure=true --providers.docker --providers.docker.exposedByDefault=false
-    restart: on-failure
+    restart: "no"
     ports:
       - "80:80"
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
-
   cmyktohsl:
     build: cmyktohsl
-    restart: on-failure
+    restart: "no"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.quote-service.rule=Host(`vagrantbox.local`) && PathPrefix(`/quotes/`)"
-      - "traefik.http.middlewares.quote-service-strip.stripprefix.prefixes=/quotes"
-      - "traefik.http.services.quote-service.loadbalancer.server.port=3000"
-      - "traefik.http.routers.quote-service.middlewares=quote-service-strip"
-    ports:
-      - "3000:3000"
+      - "traefik.http.routers.cmyktohsl.rule=PathPrefix(`/cmyktohsl`)"
+      - "traefik.http.routers.cmyktohsl.middlewares=cmyktohsl-stripprefix"
+      - "traefik.http.services.cmyktohsl.loadbalancer.server.port=3000"
+      - "traefik.http.middlewares.cmyktohsl-stripprefix.stripprefix.prefixes=/cmyktohsl"
+  
+  hextorgb:
+    build: hextorgb
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hextorgb.rule=PathPrefix(`/hextorgb`)"
+      - "traefik.http.routers.hextorgb.middlewares=hextorgb-stripprefix"
+      - "traefik.http.services.hextorgb.loadbalancer.server.port=3100"
+      - "traefik.http.middlewares.hextorgb-stripprefix.stripprefix.prefixes=/hextorgb"
 
     

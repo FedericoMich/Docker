@@ -6,8 +6,6 @@ COPY ["package.json", "package-lock.json"]
 
 RUN npm install && npm start
 
-COPY . /app
-
 ENTRYPOINT ["ts-node", "src/HttpServer.ts"]
 
-EXPOSE 3000
+EXPOSE 3100
