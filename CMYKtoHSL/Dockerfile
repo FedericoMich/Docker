@@ -1,13 +1,9 @@
 FROM node:current-alpine3.14
 
-WORKDIR /app
+COPY . .
 
-COPY ["package.json", "package-lock.json"]
-
-RUN npm install && npm start
-
-COPY . /app
-
-ENTRYPOINT ["ts-node", "src/HttpServer.ts"]
+RUN npm install
 
 EXPOSE 3000
+
+ENTRYPOINT [ "npm", "start" ]

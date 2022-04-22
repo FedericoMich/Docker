@@ -1,5 +1,4 @@
 version: "1"
-
 services:
   reverse-proxy:
     image: traefik
@@ -10,7 +9,6 @@ services:
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-
   cmyktohsl:
     build: cmyktohsl
     restart: "no"
@@ -20,7 +18,6 @@ services:
       - "traefik.http.routers.cmyktohsl.middlewares=cmyktohsl-stripprefix"
       - "traefik.http.services.cmyktohsl.loadbalancer.server.port=3000"
       - "traefik.http.middlewares.cmyktohsl-stripprefix.stripprefix.prefixes=/cmyktohsl"
-  
   hextorgb:
     build: hextorgb
     restart: "no"
@@ -30,5 +27,3 @@ services:
       - "traefik.http.routers.hextorgb.middlewares=hextorgb-stripprefix"
       - "traefik.http.services.hextorgb.loadbalancer.server.port=3100"
       - "traefik.http.middlewares.hextorgb-stripprefix.stripprefix.prefixes=/hextorgb"
-
-    
