@@ -1,0 +1,10 @@
+
+
+
+URL to test Mircoservice
+
+# CMYK to HSL 
+http://localhost/cmyktohsl?color=[0,0,70,0] 
+
+# HEX to RGB
+http://localhost/hextorgb?color=ffffff
