@@ -1,8 +1,8 @@
 import colorConverter from 'color-convert'
 
 
-export const HextoRgb = (color: any) => {
+export const HsltoHex = (color: any) => {
 
-    return colorConverter.hex.rgb(color)
+    return colorConverter.hsl.hex(color)
 
 }

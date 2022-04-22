@@ -1,10 +1,16 @@
+#######DOCKER-COMPOSE COMMAND#######
+
+docker-compose build
+docker-compose up -d
 
 
-
-URL to test Mircoservice
+######URL to test Mircoservice######
 
 # CMYK to HSL 
-http://localhost/cmyktohsl?color=[0,0,70,0] 
+http://localhost/cmyktohsl?color=[0,0,70,0]     ---> [60,100,65]
 
 # HEX to RGB
-http://localhost/hextorgb?color=ffffff
+http://localhost/hextorgb?color=ffffff          ---> [255,255,255]
+
+# HSL to HEX
+http://localhost/hsltohex?color=[50,100,50]     --->  FFD500

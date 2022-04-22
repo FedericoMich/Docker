@@ -1,4 +1,5 @@
 version: "3"
+
 services:
   reverse-proxy:
     image: traefik
@@ -19,6 +20,7 @@ services:
       - "traefik.http.routers.cmyktohsl.middlewares=cmyktohsl-stripprefix"
       - "traefik.http.services.cmyktohsl.loadbalancer.server.port=3000"
       - "traefik.http.middlewares.cmyktohsl-stripprefix.stripprefix.prefixes=/cmyktohsl"
+  
   hextorgb:
     build: hextorgb
     restart: "no"
@@ -28,3 +30,13 @@ services:
       - "traefik.http.routers.hextorgb.middlewares=hextorgb-stripprefix"
       - "traefik.http.services.hextorgb.loadbalancer.server.port=3100"
       - "traefik.http.middlewares.hextorgb-stripprefix.stripprefix.prefixes=/hextorgb"
+  
+  hsltohex:
+    build: hsltohex
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hsltohex.rule=PathPrefix(`/hsltohex`)"
+      - "traefik.http.routers.hsltohex.middlewares=hsltohex-stripprefix"
+      - "traefik.http.services.hsltohex.loadbalancer.server.port=3200"
+      - "traefik.http.middlewares.hsltohex-stripprefix.stripprefix.prefixes=/hsltohex"
