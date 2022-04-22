@@ -40,3 +40,13 @@ services:
       - "traefik.http.routers.hsltohex.middlewares=hsltohex-stripprefix"
       - "traefik.http.services.hsltohex.loadbalancer.server.port=3200"
       - "traefik.http.middlewares.hsltohex-stripprefix.stripprefix.prefixes=/hsltohex"
+
+  rgbtocmyk:
+    build: rgbtocmyk
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rgbtocmyk.rule=PathPrefix(`/rgbtocmyk`)"
+      - "traefik.http.routers.rgbtocmyk.middlewares=rgbtocmyk-stripprefix"
+      - "traefik.http.services.rgbtocmyk.loadbalancer.server.port=3300"
+      - "traefik.http.middlewares.rgbtocmyk-stripprefix.stripprefix.prefixes=/rgbtocmyk"
