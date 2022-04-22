@@ -6,8 +6,6 @@ class HttpController {
         server.get('/', (req, res) => {
             const color = (req.query.color as any).toString();
             const convertedColor = HextoRgb(color);
-
-            console.log(convertedColor)
             res.send(convertedColor);
         });
     }

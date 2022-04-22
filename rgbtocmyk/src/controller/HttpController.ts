@@ -6,8 +6,6 @@ class HttpController {
         server.get('/', (req, res) => {
             const color = JSON.parse(req.query.color as any);
             const convertedColor = RgbToCmyk(color);
-
-            console.log(convertedColor)
             res.send(convertedColor);
         });
     }
